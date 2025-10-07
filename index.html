@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 정책 제안서 생성기 (단일 제안)</title>
     <style>
-        /* CSS 스타일: 연한 노란색 배경과 입력 칸 스타일 변경 */
+        /* CSS 스타일: 노인 친화적인 색상 및 가독성 최적화 */
         body { 
             font-family: 'Malgun Gothic', sans-serif; 
             line-height: 1.8; 
@@ -13,41 +13,32 @@
             padding: 20px; 
             max-width: 800px; 
             margin: 0 auto; 
-            background-color: #fffaf0; 
-            color: #333; 
+            background-color: #f7f7f5; /* 아주 연한 회백색 (눈부심 방지) */
+            color: #333344; /* 짙은 남색 계열로 텍스트 대비 확보 */
         }
-        h2 { color: #d9534f; border-bottom: 2px solid #d9534f; padding-bottom: 10px; font-size: 26px; }
-        h3 { font-size: 22px; margin-top: 30px; }
+        h2 { color: #6a5acd; border-bottom: 2px solid #b0c4de; padding-bottom: 10px; font-size: 26px; } /* 차분한 보라색 계열 */
+        h3 { font-size: 22px; margin-top: 30px; color: #4682b4; } /* 차분한 파란색 계열 */
         p { margin-bottom: 15px; }
         
         /* 버튼식 입력란 스타일 */
         .input-group { 
             background-color: #ffffff;
-            border: 1px solid #ffcc66; 
+            border: 1px solid #c0c0c0; /* 회색 테두리 */
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .input-group label { 
             display: block; 
             font-weight: bold; 
             margin-bottom: 5px; 
             font-size: 18px; 
-            color: #007bff; 
+            color: #4682b4; /* 강조색 */
         }
         input[type="text"] { 
             width: 100%; 
             padding: 12px; 
             box-sizing: border-box; 
-            border: 1px solid #ffcc66; 
-            border-radius: 4px; 
-            font-size: 16px; 
-            margin-top: 5px;
-        }
-
-        /* 일반 버튼 스타일 */
-        button { 
-            background-color: #d9534f; 
-            color: white; 
-            padding: 12px 20px;
+            border: 1px solid #a9a9a9; /* 테두리를 조금 더 진하게 */
+            border-radius:
