@@ -13,7 +13,7 @@
             padding: 20px; 
             max-width: 800px; 
             margin: 0 auto; 
-            background-color: #fffaf0; /* 연한 노란색 배경 (아이보리/베이지 톤) */
+            background-color: #fffaf0; 
             color: #333; 
         }
         h2 { color: #d9534f; border-bottom: 2px solid #d9534f; padding-bottom: 10px; font-size: 26px; }
@@ -34,7 +34,7 @@
             font-weight: bold; 
             margin-bottom: 5px; 
             font-size: 18px; 
-            color: #007bff; /* 강조 색상 */
+            color: #007bff; 
         }
         input[type="text"] { 
             width: 100%; 
@@ -48,96 +48,6 @@
 
         /* 일반 버튼 스타일 */
         button { 
-            background-color: #d9534f; /* 붉은색 버튼 */
+            background-color: #d9534f; 
             color: white; 
-            padding: 12px 20px; 
-            margin-top: 20px; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-size: 18px; 
-            transition: background-color 0.3s; 
-            width: 100%; 
-            box-sizing: border-box;
-        }
-        button:hover { background-color: #c9302c; }
-        
-        /* 결과 박스 스타일 */
-        .result-box { margin-top: 30px; padding: 20px; border: 1px solid #ddd; background-color: #fff; border-radius: 8px; }
-        .prompt-output { background-color: #e9ecef; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-break: break-all; font-family: monospace; font-size: 16px; margin-top: 10px; }
-        .copy-btn { background-color: #007bff; margin-left: 0; font-size: 18px; }
-        .copy-btn:hover { background-color: #0056b3; }
-    </style>
-</head>
-<body>
-
-    <h2>📢 국민신문고 AI 정책 제안서 생성기</h2>
-    <p>해결할 문제와 지역, 두 가지를 입력하면, 정부 제안에 바로 사용할 수 있는 최적의 1가지 정책이 완성됩니다.</p>
-
-    <div id="input-section">
-        
-        <div class="input-group">
-            <label for="keyword2">📌 키워드 1: 해결할 문제 (예: 키오스크 사용 어려움, 외로움)</label>
-            <input type="text" id="keyword2" placeholder="필수 입력 (예: 디지털 격차)">
-        </div>
-
-        <div class="input-group">
-            <label for="keyword3">📍 키워드 2: 정책 적용 지역 (예: 서울시 강남구, 경기도 용인시)</label>
-            <input type="text" id="keyword3" placeholder="필수 입력 (예: 부산 해운대구)">
-        </div>
-
-        <button onclick="generatePrompt()">⭐ 제안서 프롬프트 생성하기</button>
-    </div>
-
-    <div id="result-section" class="result-box" style="display:none;">
-        <h3>✅ 생성된 국민신문고 정책 제안 프롬프트</h3>
-        <p>**주의:** 이 질문을 AI에 붙여넣으면, AI는 **설명 없이 바로 제안서 양식**을 출력합니다.</p>
-        <div id="promptOutput" class="prompt-output"></div>
-        <button class="copy-btn" onclick="copyPrompt()">질문 복사하기</button>
-
-        </div>
-
-    <script>
-        function generatePrompt() {
-            // 정책 대상(k1)은 '노인'으로 고정
-            const k1 = '노인';
-            const k2 = document.getElementById('keyword2').value.trim() || '디지털 격차';
-            const k3 = document.getElementById('keyword3').value.trim() || '전국';
-
-            // 1. AI에게 던질 최적의 질문(프롬프트) 생성
-            // 목표: 정책 부서 연결, 단 하나의 제안, 국민신문고 형식
-            const prompt = `당신은 정책 전문가입니다. 당신이 해야 할 일은 다음과 같습니다.
-            
-            1. **정책 목표:** [${k3}] 지역의 [${k1}]이 겪는 [${k2}] 문제를 해결하기 위한 가장 시급하고 효과적인 정책 아이디어 **단 하나**를 제안합니다.
-            2. **정책 형식:** 제안에 대한 설명이나 부연 없이, 오직 아래의 **국민신문고 정책 제안 양식**에 맞춰 결과만 출력하세요.
-            3. **연결 정보:** 이 정책을 담당할 **가장 적합한 [${k3}] 지역의 정책 부서**를 예측하여 함께 명시하세요.
-
-            --- 국민신문고 정책 제안 양식 ---
-            
-            [제안 제목]: 
-            [담당 정책 부서(예측)]: 
-            
-            1. 현황 및 문제점 (3줄 이내 요약):
-            2. 정책 내용 및 실행 방안:
-            3. 기대 효과 (3가지): 
-            
-            ------------------------------------`;
-
-            // 2. 결과 화면에 표시
-            document.getElementById('promptOutput').textContent = prompt;
-            document.getElementById('result-section').style.display = 'block';
-        }
-
-        function copyPrompt() {
-            const promptText = document.getElementById('promptOutput').textContent;
-            navigator.clipboard.writeText(promptText).then(() => {
-                alert('AI 질문(프롬프트)이 복사되었습니다. ChatGPT/Gemini에 붙여넣으세요!');
-            }).catch(err => {
-                console.error('복사 실패:', err);
-                alert('복사에 실패했습니다. 내용을 직접 드래그하여 복사해 주세요.');
-            });
-        }
-    </script>
-
-</body>
-</html>
+            padding: 12px 20px;
