@@ -110,19 +110,20 @@
             <a href="https://www.epeople.go.kr/index.npaid" target="_blank">국민신문고 정책 제안 바로가기</a>
             <a href="https://www.gov.kr/portal/main" target="_blank">정부24 (정부 서비스 통합 창구)</a>
             <a href="https://www.seniorjob.or.kr/" target="_blank">노인 일자리 및 사회 활동 지원 사업단</a>
-            <a id="localGovLink" href="#" target="_blank"></a> </div>
+            <a id="localGovLink" href="#" target="_blank"></a> 
+        </div>
     </div>
 
     <script>
+        // generatePrompt 함수가 전역으로 잘 정의되어 있는지 확인
         function generatePrompt() {
-            // 정책 대상(k1)은 '노인'으로 고정
+            // 키워드 입력 값 가져오기 (오류 방지를 위해 .value.trim()을 명확히 사용)
             const k1 = '노인';
-            // 키워드 입력 값 가져오기
             const k2 = document.getElementById('keyword2').value.trim() || '디지털 격차';
             const k3 = document.getElementById('keyword3').value.trim() || '해당 지역';
             const k4 = document.getElementById('keyword4').value.trim() || '현장 지원'; 
 
-            // 프롬프트: 제목이나 부가 설명 없이 오직 양식만 출력하도록 강력하게 지시
+            // 프롬프트: AI 서론 및 부가 설명이 나오지 않도록 강력히 지시
             const prompt = `정책 전문가로서, 다음과 같은 엄격한 형식에 맞춰 단 하나의 정책을 제안합니다. 제안의 목적이나 역할에 대한 **어떠한 설명이나 서론 문구도 출력하지 마십시오.** 오직 아래 양식만 출력합니다.
 
 1. **정책 목표:** [${k3}] 지역의 [${k1}]이 겪는 [${k2}] 문제를 해결하기 위한 **가장 시급하고 효과적인 [${k4}] 정책 아이디어** 단 하나를 제안합니다.
@@ -149,9 +150,10 @@
             const localGovLink = document.getElementById('localGovLink');
             localGovLink.href = `https://www.google.com/search?q=${k3}+구청+홈페이지`;
             localGovLink.textContent = `${k3} 관공서 홈페이지 검색`;
-            localGovLink.style.display = 'block'; // 링크가 항상 표시되도록 설정
+            localGovLink.style.display = 'block'; 
         }
 
+        // 복사 함수
         function copyPrompt() {
             const promptText = document.getElementById('promptOutput').textContent;
             navigator.clipboard.writeText(promptText).then(() => {
