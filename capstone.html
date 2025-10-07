@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 정책 프롬프트 생성기 (노인 맞춤)</title>
+    <style>
+        /* 2. CSS 스타일은 여기에 포함됩니다 */
+        body { font-family: 'Malgun Gothic', sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; background-color: #f4f7f9; }
+        h2 { color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input[type="text"] { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #28a745; color: white; padding: 12px 20px; margin-top: 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s; }
+        button:hover { background-color: #218838; }
+        .result-box { margin-top: 30px; padding: 20px; border: 1px solid #ddd; background-color: #fff; border-radius: 8px; }
+        .prompt-output { background-color: #e9ecef; padding: 15px; border-radius: 5px; white-space: pre-wrap; word-break: break-all; font-family: monospace; font-size: 14px; margin-top: 10px; }
+        .explanation-box { margin-top: 20px; padding: 15px; border-left: 5px solid #ffc107; background-color: #fff3cd; color: #856404; border-radius: 4px; }
+        .copy-btn { background-color: #007bff; margin-left: 0; }
+        .copy-btn:hover { background-color: #0056b3; }
+        .keyword-label { font-size: 0.9em; color: #6c757d; display: block; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>🤖 AI 정책 프롬프트 자동 생성기</h2>
+    <p>정책의 핵심 키워드를 **최대 3가지** 입력해 주세요. AI에게 던질 **최적의 질문**과 노인분들을 위한 **쉬운 설명**을 만들어 드립니다.</p>
+
+    <div id="input-section">
+        <label for="keyword1">핵심 키워드 1: 정책 대상 (예: 독거노인, 시니어)</label>
+        <input type="text" id="keyword1" placeholder="필수 입력 (예: 독거 어르신)">
+
+        <label for="keyword2">핵심 키워드 2: 해결할 문제 (예: 고독사, 보이스피싱)</label>
+        <input type="text" id="keyword2" placeholder="필수 입력 (예: 디지털 격차)">
+
+        <label for="keyword3">핵심 키워드 3: 활용 기술/분야 (예: AI 챗봇, 스마트워치)</label>
+        <input type="text" id="keyword3" placeholder="선택 입력 (예: 키오스크)">
+
+        <button onclick="generatePrompt()">프롬프트 생성하기</button>
+    </div>
+
+    <div id="result-section" class="result-box" style="display:none;">
+        <h3>✅ 생성된 맞춤 정책 프롬프트</h3>
+        <p>아래 질문을 복사해서 ChatGPT나 Gemini에 붙여넣으세요.</p>
+        <div id="promptOutput" class="prompt-output"></div>
+        <button class="copy-btn" onclick="copyPrompt()">질문 복사하기</button>
+
+        <h3 style="margin-top: 30px;">👴 가이드북용 '쉬운 설명' 문구</h3>
+        <div id="explanationOutput" class="explanation-box"></div>
+    </div>
+
+    <script>
+        function generatePrompt() {
+            const k1 = document.getElementById('keyword1').value.trim() || '고령층';
+            const k2 = document.getElementById('keyword2').value.trim() || '생활 불편';
+            const k3 = document.getElementById('keyword3').value.trim() || '지역 봉사';
+
+            // 1. AI에게 던질 최적의 질문(프롬프트) 생성
+            const prompt = `당신은 정책 전문가이자, 쉬운 설명을 잘하는 작가입니다. 
+            
+            요청:
+            1. **정책 제안:** [${k1}]을 위한 정책을 [${k2}] 문제를 해결하고 [${k3}]을(를) 활용하는 아이디어로 **3가지** 제안해 주세요.
+            2. **형식:** 각 정책의 이름, 실행 방법, 장단점을 포함하여 **표**로 깔끔하게 정리해 주세요.
+            3. **설명:** 정책 제안 표 아래에, 이 정책들이 왜 필요한지 **노인분들이 쉽게 이해할 수 있도록** '손자/손녀가 설명하는 방식'으로 **간결하게** 설명해 주세요. (5줄 이내)`;
+
+            // 2. 노인분들을 위한 쉬운 설명 문구 생성
+            const explanation = `
+            ⭐ **${k1}** 분들이 겪는 가장 큰 어려움인 **'${k2}'**를 해결하기 위해, 우리 팀은 **'${k3}'** 같은 새로운 방법을 사용해봤어요.
+            
+            **AI(인공지능)에게** 이 세 가지(대상, 문제, 방법)를 알려주니까, AI가 **가장 좋은 해결책 3가지**를 찾아줬어요.
+            
+            이 정책은 **${k1}** 분들의 **${k2}**를 덜어주고, 더 행복한 생활을 만드는 데 도움이 될 거예요.
+            `;
+
+            // 3. 결과 화면에 표시
+            document.getElementById('promptOutput').textContent = prompt;
+            document.getElementById('explanationOutput').innerHTML = explanation.replace(/\n/g, '<br>');
+            document.getElementById('result-section').style.display = 'block';
+        }
+
+        function copyPrompt() {
+            const promptText = document.getElementById('promptOutput').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                alert('AI 질문(프롬프트)이 복사되었습니다. ChatGPT/Gemini에 붙여넣으세요!');
+            }).catch(err => {
+                console.error('복사 실패:', err);
+                alert('복사에 실패했습니다. 내용을 직접 드래그하여 복사해 주세요.');
+            });
+        }
+    </script>
+
+</body>
+</html>
